@@ -29,7 +29,7 @@ void generatorRandom(int repeat, int lengthPass) {
    time_t time1;
    srand((unsigned)time(&time1));
    for (int i = 0; i<repeat; i++) {
-      printf("%d password generated left.\n", (repeat-i));
+      printf("No.%d combinantion\t\t", (i+1));
      
       for (int j = 0; j<lengthPass; j++) {
 	 int num = rand() % 3;
@@ -55,6 +55,25 @@ void usrInputFunction(int *usrInput1, int *usrInput2) {
    if (*usrInput2 <= 0) {
       printf("The value %d of the length of the password is invalid\n", *usrInput2);
       return;
+   }
+
+   if (*usrInput2 >= 30) {
+      char ans;
+      char notValidAns[] = "abcdefghijklmopqrstuvwxzABCDEFGHIJKLMOPQRSTUVWXZ";
+      printf("The length of the password may be too long.\nAre you sure you want to continue? (y/n)\n");
+      scanf("%c", &ans);
+
+      if (ans == 'n' || ans == 'N') {
+         printf("Abort.");
+         return;
+      }
+      for (int i = 0; i < (sizeof(notValidAns)/sizeof(notValidAns[0])); i++) {
+         if (ans == notValidAns[i]) {
+            printf("Invalid answer. Abort");
+            return;
+         }
+      }
+     
    }
    
    printf("How many passwords need to be generated?\nInput:");
