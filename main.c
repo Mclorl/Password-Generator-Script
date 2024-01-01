@@ -58,22 +58,16 @@ void usrInputFunction(int *usrInput1, int *usrInput2) {
    }
 
    if (*usrInput2 >= 30) {
-      char ans;
-      char notValidAns[] = "abcdefghijklmopqrstuvwxzABCDEFGHIJKLMOPQRSTUVWXZ";
-      printf("The length of the password may be too long.\nAre you sure you want to continue? (y/n)\n");
-      scanf("%c", &ans);
-
-      if (ans == 'n' || ans == 'N') {
-         printf("Abort.");
+      int ans;
+      printf("The length of the password may be too long.\nAre you sure you want to continue? (0=y/1=n): ");
+      scanf("%d", &ans);
+      if (ans == 1) {
+         printf("Abort.\n");
+         return;
+      } else if (ans > 1 || ans < 0) {
+         printf("%d is an invalid input. Abort.\n", ans);
          return;
       }
-      for (int i = 0; i < (sizeof(notValidAns)/sizeof(notValidAns[0])); i++) {
-         if (ans == notValidAns[i]) {
-            printf("Invalid answer. Abort");
-            return;
-         }
-      }
-     
    }
    
    printf("How many passwords need to be generated?\nInput:");
@@ -83,3 +77,4 @@ void usrInputFunction(int *usrInput1, int *usrInput2) {
       return;
    }
 }
+
